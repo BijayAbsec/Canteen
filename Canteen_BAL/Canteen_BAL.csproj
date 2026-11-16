@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{52BAFE35-8BFE-4ED0-91E3-F97D461302F9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Canteen_BAL</RootNamespace>
+    <AssemblyName>Canteen_BAL</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Changepassword_BAL.cs" />
+    <Compile Include="Daywise_foodmenu_BAL.cs" />
+    <Compile Include="Daywise_intake_BAL.cs" />
+    <Compile Include="dept_BAL.cs" />
+    <Compile Include="Food_BAL.cs" />
+    <Compile Include="Food_transaction_master_BAL.cs" />
+    <Compile Include="Forgotpassword_BAL.cs" />
+    <Compile Include="Item_BAL.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="role_BAL.cs" />
+    <Compile Include="Signin_BAL.cs" />
+    <Compile Include="Signup_BAL.cs" />
+    <Compile Include="Staff_list_BAL.cs" />
+    <Compile Include="Time_BAL.cs" />
+    <Compile Include="Token_BAL.cs" />
+    <Compile Include="Unit_BAL.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Canteen_DAL\Canteen_DAL.csproj">
+      <Project>{ac333014-3ac3-47dd-b433-147af75af506}</Project>
+      <Name>Canteen_DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Canteen_ENTITY\Canteen_ENTITY.csproj">
+      <Project>{036ae119-5979-4bb6-afd4-1c6dfda78cf0}</Project>
+      <Name>Canteen_ENTITY</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Canteen_GlobalVariable\Canteen_GlobalVariable.csproj">
+      <Project>{50c0b07b-b0ba-4031-aca1-16a045f94e72}</Project>
+      <Name>Canteen_GlobalVariable</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

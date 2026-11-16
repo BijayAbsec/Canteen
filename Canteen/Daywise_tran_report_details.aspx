@@ -1,0 +1,127 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Dashboard.Master" AutoEventWireup="true" CodeBehind="Daywise_tran_report_details.aspx.cs" Inherits="Canteen.Daywise_tran_report_details" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="cphlSearch" runat="server">
+    <asp:LinkButton ID="btnSearch" runat="server" class="btn btn-primary" OnClick="btnSearch_Click"><i class="fas fa-search fa-sm"></i></asp:LinkButton>
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="cplBody" runat="server">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Transaction Report</h1>
+    </div>
+    <div class="col-xl-12 col-lg-12">
+        <div class="card shadow mb-12">
+            <!-- Card Header - Dropdown -->
+            <div
+                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Transaction Details List</h6>
+
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <%--<div class="chart-area">--%>
+                <asp:ListView ID="Lv_tran" runat="server" DataKeyNames = "foodtransaction_id" GroupPlaceholderID="groupPlaceHolder1" ItemPlaceholderID="itemPlaceHolder1" OnPagePropertiesChanging="Lv_tran_PagePropertiesChanging" OnItemDataBound="Lv_tran_ItemDataBound">
+                    <LayoutTemplate>
+                        <div class="row">
+                            <label class="col-sm-12 text-right">Total Record : <span id="totalrecord" runat="server" class="label label-primary"></span></label>
+                        </div>
+                        <table class="table table-striped" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th style="width: 5%; text-align: center;">#</th>
+                                    <th style="width: 10%; text-align: center;">Date</th>
+                                    <th style="width: 10%; text-align: center;">Time</th>
+                                    <th style="width: 20%; text-align: center;">Name</th>
+                                    <th style="width: 5%; text-align: center;">No of Guest</th>
+                                    <th style="width: 50%; text-align: center;">Food Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <asp:PlaceHolder runat="server" ID="groupPlaceHolder1"></asp:PlaceHolder>
+                            </tbody>
+                        </table>
+                        <div class="row">
+                            <div class="col-sm-12 text-right">
+                                <asp:DataPager ID="DataPager1" runat="server" class="btn-group btn-group-sm" PagedControlID="Lv_tran" PageSize="10">
+                                    <Fields>
+                                        <asp:NextPreviousPagerField PreviousPageText="&laquo;" FirstPageText="|<" ShowPreviousPageButton="true"
+                                            ShowFirstPageButton="true" ShowNextPageButton="false" ShowLastPageButton="false"
+                                            ButtonCssClass="btn btn-default" RenderNonBreakingSpacesBetweenControls="false" RenderDisabledButtonsAsLabels="false" />
+                                        <asp:NumericPagerField ButtonType="Link" CurrentPageLabelCssClass="btn btn-primary btn-xs" RenderNonBreakingSpacesBetweenControls="false"
+                                            NumericButtonCssClass="btn btn-default" ButtonCount="10" NextPageText="..." NextPreviousButtonCssClass="btn btn-default" />
+                                        <asp:NextPreviousPagerField NextPageText="&raquo;" LastPageText=">|" ShowNextPageButton="true"
+                                            ShowLastPageButton="true" ShowPreviousPageButton="false" ShowFirstPageButton="false"
+                                            ButtonCssClass="btn btn-default" RenderNonBreakingSpacesBetweenControls="false" RenderDisabledButtonsAsLabels="false" />
+                                    </Fields>
+                                </asp:DataPager>
+                            </div>
+                        </div>
+                        <div class="gap-mid"></div>
+                    </LayoutTemplate>
+                    <GroupTemplate>
+                        <asp:PlaceHolder runat="server" ID="itemPlaceHolder1"></asp:PlaceHolder>
+                    </GroupTemplate>
+                    <ItemTemplate>
+                        <tr>
+                            <td style="text-align: center;"><%# Container.DataItemIndex + 1 %></td>
+                            <td style="text-align: center;">
+                                <asp:Label ID="lblIntakeDate" runat="server" Text='<%# Eval("created_date", "{0:dd/MM/yyyy hh:mm:ss tt}") %>'></asp:Label></td>
+                            <td style="text-align: center;">
+                                <asp:Label ID="lbl_time" runat="server" Text='<%# Eval("time_name") %>'></asp:Label></td>
+                            <td style="text-align: center;">
+                                <asp:Label ID="lbl_item_name" runat="server" Text='<%# Eval("user_name") %>'></asp:Label></td>                            
+                            <td style="text-align: center;">
+                                <asp:Label ID="lbl_unit_name" runat="server" Text='<%# Eval("guest_no") %>'></asp:Label></td>
+                            <td style="text-align: center;">
+                                <asp:ListView ID="lvFoodDetails" runat="server" GroupPlaceholderID="groupPlaceHolder2" ItemPlaceholderID="itemPlaceHolder2">
+                                    <LayoutTemplate>
+                                        <table class="table table-striped" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 25%; text-align: center;">Token No</th>
+                                                    <th style="width: 75%; text-align: center;">Items</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <asp:PlaceHolder runat="server" ID="groupPlaceHolder2"></asp:PlaceHolder>
+                                            </tbody>
+                                        </table>
+                                    </LayoutTemplate>
+                                    <GroupTemplate>
+                                        <asp:PlaceHolder runat="server" ID="itemPlaceHolder2"></asp:PlaceHolder>
+                                    </GroupTemplate>
+                                    <ItemTemplate>
+                                        <tr>
+                                            <td style="text-align: center;"><asp:Label ID="lblToken" runat="server" Text='<%# Eval("token_no") %>'></asp:Label></td>
+                                            <td style="text-align: center;"><asp:Label ID="lblFoodItem" runat="server" Text='<%# Eval("food_name") %>'></asp:Label></td>
+                                        </tr>
+                                    </ItemTemplate>
+                                </asp:ListView>
+                            </td>
+                        </tr>
+                    </ItemTemplate>
+                    <EmptyDataTemplate>
+                        <table class="table table-striped" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th style="width: 5%; text-align: center;">#</th>
+                                    <th style="width: 10%; text-align: center;">Date</th>
+                                    <th style="width: 10%; text-align: center;">Time</th>
+                                    <th style="width: 20%; text-align: center;">Name</th>
+                                    <th style="width: 5%; text-align: center;">No of Guest</th>
+                                    <th style="width: 50%; text-align: center;">Food Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="10" style="text-align: center;">No record found!
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </EmptyDataTemplate>
+                </asp:ListView>
+            </div>
+        </div>
+    </div>
+</asp:Content>
